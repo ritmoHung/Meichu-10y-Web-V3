@@ -243,16 +243,16 @@
 
 	// Footer
 	.footer-link {
-		@apply text-lg aspect-square transition-colors #{!important};
+		@apply aspect-square;
 	
 		&[data-name="Facebook"] {
-			@apply hover:text-[#1877F2] #{!important};
+			@apply hover:text-[#1877F2];
 		}
 		&[data-name="Instagram"] {
-			@apply hover:text-[#D92E7F] #{!important};
+			@apply hover:text-[#D92E7F];
 		}
 		&[data-name="Mail"] {
-			@apply hover:text-[#EA4335] #{!important};
+			@apply hover:text-[#EA4335];
 		}
 	}
 }
