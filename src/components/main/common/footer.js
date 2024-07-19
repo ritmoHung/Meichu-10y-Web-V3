@@ -2,9 +2,9 @@
 import { Button } from "@/components/ui/button";
 
 // Font Awesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons"
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { Mail } from "lucide-react";
 
 const links = [
 	{
@@ -20,7 +20,7 @@ const links = [
 	{
 		name: "Mail",
 		href: "mailto:mchackathon2024@gmail.com",
-		icon: <FontAwesomeIcon icon={faEnvelope} />,
+		icon: <Mail size={"1.2rem"} />,
 	}
 ];
 
@@ -41,7 +41,7 @@ function FooterLinks({ links }) {
 	return (
 		<div className="flex gap-x-6">
 			{links.map((link, index) => (
-				<Button key={index} className="footer-link" data-name={link.name} variant="ghost" asChild>
+				<Button key={index} className="footer-link !px-0" data-name={link.name} variant="ghost" asChild>
 					<a id={`link-${link.name.toLowerCase()}`} href={link.href} aria-label={link.name} target="_blank" rel="noreferrer noopener">
 						{link.icon}
 					</a>
