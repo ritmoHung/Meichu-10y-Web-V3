@@ -1,0 +1,302 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --------------------------- BREAKPOINTS ---------------------------
+ *  xs     sm     md     lg      xl    2xl    3xl
+ * 360px  576px  768px  992px  1200px 1400px 1800px
+ */
+
+
+
+/* ---------------------------- THEMES ---------------------------- */
+@layer base {
+	:root {
+		--scrollbar-size: 1.5rem;
+
+		// Neumorphism (Intensity: 0.04px)
+		--neu-fill-1: 212 212 218 / 0.85;   // #D4D4DA
+		--neu-fill-2: 251 253 255 / 0.85;   // #FBFDFF
+		--neu-shadow-1: 255 255 255;        // #FFFFFF
+		--neu-shadow-2: 188 189 194;        // #BCBDC2
+
+		// Accent
+		--accent-gradient-1: 185 100% 75%;
+		--accent-gradient-2: 225 100% 75%;
+		--accent-gradient-3: 265 100% 75%;
+
+		--primary-foreground: 70 74 83;     // #464A53
+		--primary: 235 236 242;             // #EBECF2
+		--secondary-foreground: 134 139 152;
+		--secondary: 224 224 224;           // #E0E0E0
+		--primary-gradient-1: var(--accent-gradient-2);
+		--primary-gradient-2: var(--accent-gradient-3);
+		--accent: var(--accent-gradient-2);
+
+		--border: 240 5.9% 90%;
+		--input: 240 5.9% 90%;
+		--ring: 240 10% 3.9%;
+	}
+
+	.dark {
+		// Neumorphism (Intensity: 0.16px)
+		--neu-fill-1: 32 32 37 / 0.95;      // #202025
+		--neu-fill-2: 37 39 44 / 0.95;      // #25272C
+		--neu-shadow-1: 41 42 48;           // #292A30
+		--neu-shadow-2: 29 30 34;           // #1D1E22
+
+		--primary-foreground: 235 236 242;  // #EBECF2
+		--primary: 35 36 41;                // #232429
+		--secondary-foreground: 134 139 152;
+		--secondary: 31 31 31;              // #1F1F1F
+		--primary-gradient-1: var(--accent-gradient-1);
+		--primary-gradient-2: var(--accent-gradient-2);
+		--accent: var(--accent-gradient-1);
+
+		--border: 240 3.7% 15.9%;
+		--input: 240 3.7% 15.9%;
+		--ring: 240 4.9% 83.9%;
+	}
+}
+
+
+
+/* ----------------------------- HTML ----------------------------- */
+@layer base {
+	* {
+		@apply border-border;
+	}
+
+	html {
+		@apply scroll-smooth scroll-pt-24;
+	}
+
+	body {
+		@apply grid grid-rows-[auto_1fr_auto] min-h-svh overflow-x-hidden;
+		scrollbar-gutter: stable both-edges;
+		
+		@apply bg-primary text-primary-foreground;
+		@apply font-sans text-400 tracking-wide leading-[1.6];
+	}
+}
+
+
+
+/* ---------------------------- LAYOUT ---------------------------- */
+@layer utilities {
+	@mixin wrapper-props($m1: 4rem, $m2: 6rem, $w: 1400px) {
+		--margin: #{$m1};
+		@apply grid grid-cols-[minmax(0,_1fr)];
+		width: min(100% - var(--margin), $w);
+		margin-inline: auto;
+
+		@media screen and (min-width: 576px) {
+			--margin: #{$m2};
+		}
+	}
+	.wrapper-sm {
+		@include wrapper-props($m1: 2rem, $m2: 4rem, $w: 1000px);
+	}
+	.wrapper-md {
+		@include wrapper-props;
+	}
+	.wrapper-lg {
+		@include wrapper-props($w: 1800px);
+	}
+}
+
+
+
+/* -------------------------- TYPOGRAPHY -------------------------- */
+@layer base {
+    h1, h2, h3, h4, h5, h6 {
+        @apply leading-[1.5] text-balance;
+    }
+    
+    h1 {
+        @apply text-900 font-bold;
+		@apply max-w-fit;
+    }
+    h2 {
+        @apply text-700 font-bold;
+    }
+    h3 {
+        @apply text-500 font-bold;
+    }
+    h4, h5 {
+        @apply text-400 font-bold;
+
+		& + :is(p) {
+			@apply mt-1;
+		}
+    }
+    
+    p {
+        @apply text-justify leading-[2];
+
+		& + :is(h1, h2, h3, h4, h5, h6) {
+			@apply mt-4;
+		}
+		& + :is(p) {
+			@apply mt-2;
+		}
+    }
+}
+
+@layer components {
+	.bracket {
+		@apply flex gap-[0.4ch] items-center justify-center whitespace-nowrap;
+
+		&::before, &::after {
+			@apply inline-block font-normal -translate-y-[0.1em];
+		}
+		&::before {
+			content: "[";
+		}
+		&::after {
+			content: "]";
+		}
+	}
+
+	.bracket-md::before, .bracket-md::after {
+		@apply text-[1.75em] font-normal;
+	}
+	.bracket-lg::before, .bracket-lg::after {
+		@apply text-[2.5em] font-light;
+	}
+}
+
+.text-primary-gradient {
+	@apply bg-gradient-60 from-primary-grad-1 to-primary-grad-2 bg-clip-text;
+
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    // text-fill-color: transparent;
+}
+
+
+
+/* ---------------------------- STYLES ---------------------------- */
+@layer utilities {
+	@mixin neu-concave($size) {
+		@apply bg-gradient-135 from-neu-fill-1 to-neu-fill-2 transition-box-shadow;
+		box-shadow: (- $size) (- $size) (2 * $size) rgba(var(--neu-shadow-1) / 1),
+					$size $size (2 * $size) rgba(var(--neu-shadow-2) / 1),
+	}
+
+	@mixin neu-pressed($size) {
+		@apply bg-primary transition-box-shadow;
+		box-shadow: (- $size) (- $size) (2 * $size) transparent,
+					$size $size (2 * $size) transparent,
+					inset (- $size) (- $size) (2 * $size) rgba(var(--neu-shadow-1) / 1),
+					inset $size $size (2 * $size) rgba(var(--neu-shadow-2) / 1),
+	}
+
+	.neu-concave-sm {
+		@include neu-concave(0.25rem);
+		@apply backdrop-blur-sm;
+	}
+	.neu-concave-md {
+		@include neu-concave(0.5rem);
+		@apply backdrop-blur-sm;
+	}
+	.neu-concave-lg {
+		@include neu-concave(0.75rem);
+		@apply backdrop-blur-md;
+	}
+
+	.neu-pressed-sm {
+		@include neu-pressed(0.25rem);
+		@apply backdrop-blur-sm;
+	}
+	.neu-pressed-md {
+		@include neu-pressed(0.5rem);
+		@apply backdrop-blur-sm;
+	}
+	.neu-pressed-lg {
+		@include neu-pressed(0.75rem);
+		@apply backdrop-blur-md;
+	}
+}
+
+// Homepage
+@layer components {
+	// Homepage
+	.banner-filter {
+		@apply bg-primary/40 dark:bg-primary/80 backdrop-blur-md;
+		box-shadow: 0.5rem 0 1rem 0.1rem rgba(var(--neu-shadow-2) / 0.5),
+	}
+
+	// Navbar
+	.nav-link {
+		--spacing: 0.2em;
+	
+		@apply relative max-w-fit;
+		@apply text-sm font-light tracking-[var(--spacing)] uppercase;
+		@apply hover:after:opacity-100;
+	
+		&::after {
+			@apply content-[""] absolute left-0 bottom-[-0.15em] w-[calc(100%_-_var(--spacing))] h-[0.1rem];
+			@apply bg-primary-foreground rounded-full opacity-0 transition-opacity;
+		}
+	}
+
+	// Footer
+	.footer-link {
+		@apply text-lg aspect-square transition-colors #{!important};
+	
+		&[data-name="Facebook"] {
+			@apply hover:text-[#1877F2] #{!important};
+		}
+		&[data-name="Instagram"] {
+			@apply hover:text-[#D92E7F] #{!important};
+		}
+		&[data-name="Mail"] {
+			@apply hover:text-[#EA4335] #{!important};
+		}
+	}
+}
+
+@layer utilities {
+	iframe {
+		@apply aspect-video w-[min(100%,_992px)] h-full;
+	}
+}
+
+
+
+/* ---------------------------- PSEUDO ---------------------------- */
+::selection, ::-webkit-selection {
+	@apply bg-primary-foreground text-primary;
+    -webkit-text-fill-color: rgba(var(--primary));
+    -moz-text-fill-color: rgba(var(--primary));
+    // text-fill-color: rgba(var(--primary));
+}
+
+* {
+    &::-webkit-scrollbar {
+		@apply size-[calc(0.6_*_var(--scrollbar-size))];
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+	&::-webkit-scrollbar-thumb {
+		background: #A8AEB8;
+	}
+	&::-webkit-scrollbar-thumb:hover {
+		@apply bg-gradient-60 from-accent-grad-1 via-accent-grad-2 to-accent-grad-3;
+	}
+	&::-webkit-scrollbar-thumb,
+	&::-webkit-scrollbar-thumb:hover {
+		@apply border-[calc(0.2_*_var(--scrollbar-size))] border-solid border-transparent;
+		@apply rounded-[calc(0.6_*_var(--scrollbar-size))];
+		@apply bg-clip-content;
+	}
+
+    &::-webkit-scrollbar-corner {
+		@apply rounded-[calc(0.6_*_var(--scrollbar-size))];
+    }
+}

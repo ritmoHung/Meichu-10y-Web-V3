@@ -1,22 +1,48 @@
 {
-  "name": "meichu-10y-web-v3",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.4"
-  },
-  "devDependencies": {
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.4"
-  }
+	"name": "meichu-10y-web-v3",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev -p 2023 --experimental-https",
+		"build": "next build",
+		"start": "next start -p 2023",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^6.6.0",
+		"@fortawesome/free-brands-svg-icons": "^6.6.0",
+		"@fortawesome/free-regular-svg-icons": "^6.6.0",
+		"@fortawesome/free-solid-svg-icons": "^6.6.0",
+		"@fortawesome/react-fontawesome": "^0.2.2",
+		"@radix-ui/react-accordion": "^1.2.0",
+		"@radix-ui/react-dropdown-menu": "^2.1.1",
+		"@radix-ui/react-navigation-menu": "^1.2.0",
+		"@radix-ui/react-slot": "^1.1.0",
+		"autoprefixer": "^10.4.19",
+		"axios": "^1.7.2",
+		"class-variance-authority": "^0.7.0",
+		"clsx": "^2.1.1",
+		"embla-carousel-react": "^8.1.7",
+		"firebase": "^10.12.4",
+		"firebase-admin": "^12.2.0",
+		"framer-motion": "^11.3.8",
+		"lucide-react": "^0.411.0",
+		"next": "14.2.5",
+		"next-themes": "^0.3.0",
+		"react": "^18",
+		"react-dom": "^18",
+		"react-markdown": "^9.0.1",
+		"remark-gfm": "^4.0.0",
+		"swr": "^2.2.5",
+		"tailwind-merge": "^2.4.0",
+		"tailwindcss-animate": "^1.0.7"
+	},
+	"devDependencies": {
+		"eslint": "^9.7.0",
+		"eslint-config-next": "14.2.5",
+		"postcss": "^8",
+		"sass": "^1.77.8",
+		"tailwindcss": "^3.4.6"
+	},
+	"packageManager": "yarn@1.22.22"
 }
