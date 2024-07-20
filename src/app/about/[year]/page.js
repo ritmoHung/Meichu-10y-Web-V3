@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 import Hacker from "/public/imgs/about/hacker.svg";
 import Maker from "/public/imgs/about/maker.svg";
@@ -41,7 +42,7 @@ export default function YearPage({ params }) {
 
 						<Competition competition={data.data.competition} />
 
-						<Scenes scenes={data.data.scenes} params={params} />
+						<Scenes scenes={data.data.scenes} />
 
 						<Topics topics={data.data.topics} />
 
@@ -56,20 +57,22 @@ export default function YearPage({ params }) {
 }
 
 function Banner({ year, bannerUrl }) {
+	const [loaded, setLoaded] = useState(false);
+
 	return (
-        <div className="flex h-48 md:h-72 xl:h-80 overflow-hidden mb-8">
-            {bannerUrl ? (
+        <div className="relative flex h-48 md:h-72 xl:h-80 mb-8">
+            {bannerUrl && (
                 <Image
                     src={bannerUrl}
                     alt={`Banner image of ${year} Meichu Hackathon`}
-                    className="w-screen object-cover"
+                    className={`w-screen object-cover ${loaded ? "opacity-100" : "opacity-0"} transition-opacity`}
 					width={1920} height={1280}
                     quality={100}
                     priority
+					onLoad={() => setLoaded(true)}
                 />
-			) : (
-				<Skeleton className="w-screen h-full" />
 			)}
+			{!loaded && <Skeleton className="absolute top-0 left-0 w-screen h-full" />}
         </div>
 	);
 }
@@ -117,9 +120,7 @@ function Scenes({ scenes }) {
             </div>
             <div className="grid md:flex md:justify-between py-12 bg-primary-foreground">
                 <div className="wrapper-md md:grid-flow-col auto-cols-fr gap-16">
-                    <p className="text-primary-invert whitespace-pre-line">
-                        {scenes.description}
-                    </p>
+					<MarkdownParagraph className="text-primary" content={scenes.description} />
                     {/* <div className="translate-y-240"><ImageSlider slides={slides} contain /></div> */}
                 </div>
             </div>
