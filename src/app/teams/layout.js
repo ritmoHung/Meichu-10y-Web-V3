@@ -25,7 +25,7 @@ export const metadata = {
 
 export default function TeamsLayout({ children }) {
     return (
-        <div className="wrapper-md my-16 petite:my-16 md:mt-10">
+        <div className="wrapper-md mt-4 mb-16 md:mt-10">
             {children}
         </div>
     );

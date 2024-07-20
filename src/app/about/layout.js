@@ -24,7 +24,7 @@ export const metadata = {
 
 export default function AboutUsLayout({ children }) {
     return (
-        <div className="my-16 petite:my-16 md:mt-10">
+        <div className="mt-4 mb-16 md:mt-10">
             {children}
         </div>
     );
