@@ -179,13 +179,13 @@
 /* ---------------------------- STYLES ---------------------------- */
 @layer utilities {
 	@mixin neu-concave($size) {
-		@apply bg-gradient-135 from-neu-fill-1 to-neu-fill-2 transition-box-shadow;
+		@apply bg-gradient-135 from-neu-fill-1 to-neu-fill-2 transition-box-shadow backdrop-blur-[8px];
 		box-shadow: (- $size) (- $size) (2 * $size) rgba(var(--neu-shadow-1) / 1),
 					$size $size (2 * $size) rgba(var(--neu-shadow-2) / 1),
 	}
 
 	@mixin neu-pressed($size) {
-		@apply bg-primary transition-box-shadow;
+		@apply bg-primary transition-box-shadow backdrop-blur-[8px];
 		box-shadow: (- $size) (- $size) (2 * $size) transparent,
 					$size $size (2 * $size) transparent,
 					inset (- $size) (- $size) (2 * $size) rgba(var(--neu-shadow-1) / 1),
@@ -194,28 +194,22 @@
 
 	.neu-concave-sm {
 		@include neu-concave(0.25rem);
-		@apply backdrop-blur-sm;
 	}
 	.neu-concave-md {
 		@include neu-concave(0.5rem);
-		@apply backdrop-blur-sm;
 	}
 	.neu-concave-lg {
 		@include neu-concave(0.75rem);
-		@apply backdrop-blur-md;
 	}
 
 	.neu-pressed-sm {
 		@include neu-pressed(0.25rem);
-		@apply backdrop-blur-sm;
 	}
 	.neu-pressed-md {
 		@include neu-pressed(0.5rem);
-		@apply backdrop-blur-sm;
 	}
 	.neu-pressed-lg {
 		@include neu-pressed(0.75rem);
-		@apply backdrop-blur-md;
 	}
 }
 

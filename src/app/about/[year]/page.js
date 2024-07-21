@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Hacker from "/public/imgs/about/hacker.svg";
 import Maker from "/public/imgs/about/maker.svg";
@@ -12,9 +12,15 @@ import useSWR from "swr";
 import { fetcher } from "@/lib/fetcher";
 
 // Components & UI
+import Autoplay from "embla-carousel-autoplay";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { MarkdownParagraph } from "@/components/main/common/paragraph";
 import { NeuCard } from "@/components/main/common/card";
 import { Skeleton } from "@/components/ui/skeleton";
+
+// Lucide Icon
+import { Maximize } from "lucide-react";
 
 
 
@@ -35,20 +41,22 @@ export default function YearPage({ params }) {
 			</header>
             <main>
 				{data?.data && (
-					<article className="grid gap-y-32 [&_h2]:mb-16">
-						<section id="year-description" className="wrapper-md">
-							<MarkdownParagraph content={data.data.description} />
-						</section>
+					<article className="grid gap-y-32 [&_h2]:mb-12">
+						{data.data?.description && (
+							<section id="year-description" className="wrapper-md">
+								<MarkdownParagraph content={data.data?.description} />
+							</section>
+						)}
 
-						<Competition competition={data.data.competition} />
+						{data.data?.competition && <Competition competition={data.data.competition} />}
 
-						<Scenes scenes={data.data.scenes} />
+						{data.data?.scenes && <Scenes scenes={data.data.scenes} />}
 
-						<Topics topics={data.data.topics} />
+						{data.data?.topics && <Topics topics={data.data.topics} />}
 
-						<Sponsors sponsors={data.data.sponsors} />
+						{data.data?.sponsors && <Sponsors sponsors={data.data.sponsors} />}
 
-						<Staffs year={params.year} logoUrl={data.data.logoUrl} staffs={data.data.staffs} />
+						{data.data?.staffs && <Staffs year={params.year} logoUrl={data.data?.logoUrl} staffs={data.data.staffs} />}
 					</article>
 				)}
             </main>
@@ -95,7 +103,7 @@ function Competition({ competition }) {
         <section id="year-competition" className="wrapper-md">
             <h2 className="whitespace-nowrap">賽制介紹</h2>
             <div className="grid justify-center gap-y-8 lg:grid-flow-col lg:gap-x-16 xl:gap-x-32">
-                {competition.systems.map((system, index) => (
+                {competition?.systems && competition.systems.map((system, index) => (
 					<NeuCard
 						key={index}
 						className="max-w-xs"
@@ -112,16 +120,95 @@ function Competition({ competition }) {
     );
 }
 
+// TODO: Stop carousel autoplay when dialog is opened
 function Scenes({ scenes }) {
+	const [api, setApi] = useState();
+	const [count, setCount] = useState(0);
+	const [current, setCurrent] = useState(0);
+
+	const carouselOptions = {
+		align: "center",
+		loop: true,
+		skipSnaps: true,
+	};
+
+	const autoplayOptions = {
+		delay: 6000,
+		stopOnInteraction: false,
+		stopOnMouseEnter: true,
+	};
+
+	useEffect(() => {
+		if (!api) return;
+
+		setCount(api.scrollSnapList().length);
+		setCurrent(api.selectedScrollSnap() + 1);
+
+		api.on("select", () => {
+			setCurrent(api.selectedScrollSnap() + 1);
+		})
+	}, [api]);
+
 	return (
         <section id="year-scenes">
             <div className="wrapper-md">
                 <h2 className="whitespace-nowrap">活動實況</h2>
             </div>
-            <div className="grid md:flex md:justify-between py-12 bg-primary-foreground">
+            <div className="grid md:flex md:justify-between py-12 bg-zinc-50 dark:bg-zinc-900">
                 <div className="wrapper-md md:grid-flow-col auto-cols-fr gap-16">
-					<MarkdownParagraph className="text-primary" content={scenes.description} />
-                    {/* <div className="translate-y-240"><ImageSlider slides={slides} contain /></div> */}
+					<article>
+						<MarkdownParagraph content={scenes.description} />
+					</article>
+					<Dialog>
+						{/* Carousel */}
+						<Carousel opts={carouselOptions} setApi={setApi} className="mb-8 md:mb-0" plugins={[Autoplay(autoplayOptions)]}>
+							{/* Carousel Content */}
+							<CarouselContent>
+								{scenes.imgUrls && scenes.imgUrls.length > 0 && scenes.imgUrls.map((url, index) => (
+									<CarouselItem key={index} className="basis-full flex justify-center aspect-video">
+										<Image
+											src={url}
+											alt={`Event image ${index + 1}`}
+											className="object-cover"
+											width={960} height={540}
+											quality={80}
+										/>
+									</CarouselItem>
+								))}
+							</CarouselContent>
+
+							{/* Carousel Control */}
+							<div className="absolute bottom-0 right-6 flex items-center gap-x-4 translate-y-1/2">
+								<DialogTrigger className="flex items-center justify-center size-10 p-1 bg-primary rounded-full shadow-lg [&_>_svg]:disabled:opacity-50"
+											   disabled={!scenes.imgUrls || scenes.imgUrls.length === 0}>
+									<Maximize className="size-4" />
+								</DialogTrigger>
+								<div className="flex items-center gap-x-3 p-1 bg-primary rounded-full shadow-lg">
+									<CarouselPrevious className="!static !translate-y-0" />
+									<span className="w-4 font-bold text-center">{current}</span>
+									<CarouselNext className="!static !translate-y-0" />
+								</div>
+							</div>
+						</Carousel>
+
+						{/* Image Dialog Content */}
+						<DialogContent className="justify-items-center max-w-7xl">
+							<DialogHeader>
+								<DialogTitle>
+									{`活動照片 ${current}`}
+								</DialogTitle>
+								<DialogDescription>
+									<Image
+										src={scenes.imgUrls[current - 1]}
+										alt={`Event image ${current}`}
+										className="object-contain rounded-md"
+										width={1920} height={1080}
+										quality={100}
+									/>
+								</DialogDescription>
+							</DialogHeader>
+						</DialogContent>
+					</Dialog>
                 </div>
             </div>
         </section>
@@ -161,7 +248,7 @@ function Sponsors({ sponsors }) {
                     <ul key={index} className="grid auto-rows-min gap-2">
                         <h3>{sponsor.group}</h3>
                         <li className="flex flex-wrap">
-                            {sponsor.companies.map((company, index) => (
+                            {sponsor?.companies && sponsor.companies.map((company, index) => (
                                 <span key={index} className="whitespace-nowrap">
                                     {company}
                                     {(index !== sponsor.companies.length - 1) && "、"}
@@ -195,7 +282,7 @@ function Staffs({ year, logoUrl, staffs }) {
                     <ul key={index} className="grid auto-rows-min gap-2">
                         <h3>{staff.dept}</h3>
                         <li className="flex flex-wrap">
-                            {staff.members.map((member, index) => (
+                            {staff?.members && staff.members.map((member, index) => (
                                 <span key={index} className="whitespace-nowrap">
                                     {member}
                                     {(index !== staff.members.length - 1) && "\u00A0/\u00A0"}
