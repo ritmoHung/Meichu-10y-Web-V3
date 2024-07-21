@@ -15,11 +15,10 @@ export default function Home() {
 
 	return (
 		<div>
-			<header className="grid overflow-hidden h-[calc(100svh_-_10rem)]">
+			<header className="grid h-[max(90svh,_24rem)] md:h-[max(80svh,_24rem)]">
 				<Headings className="justify-self-center md:justify-self-start
-                                md:-translate-y-24 petite:translate-y-0
                                 md:ml-20 lg:ml-32 xl:ml-40" />
-                <BannerFilter className={`fixed w-screen h-full -top-1/3 md:top-0 md:-left-2/4 -z-1`} />
+                <BannerFilter className={`fixed w-screen h-full -top-1/2 md:top-0 md:-left-2/4 -z-1`} />
 			</header>
 
 			<main>
@@ -39,7 +38,7 @@ function Headings({ className }) {
 	return (
 		<div className={`${className} grid max-w-min self-center justify-items-center gap-y-[1em] px-6`}>
 			<h1 className="bracket bracket-md sm:bracket-lg w-max text-[3em] font-black">
-				<span className="text-[0.75em] sm:text-[1em]">
+				<span className="text-[0.875em] sm:text-[1em]">
 					梅竹黑客松<br />
 					<span className="text-primary-gradient">成果存放</span>
 					平台
