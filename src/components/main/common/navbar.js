@@ -7,7 +7,6 @@ import { ThemeToggle } from "@/components/main/common/theme-toggle";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu"
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
-  
 
 // Lucide Icon
 import { House, Library, MessagesSquare, Users } from "lucide-react";

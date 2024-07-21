@@ -54,8 +54,7 @@ export function TeamSec({ setInView }) {
 		align: "center",
 		skipSnaps: true,
 	}
-    
-    // TODO: Fix layout; Center in-view
+
     return (
         <InViewSec className="wrapper-lg" setInView={setInView}>
 			<Carousel opts={options} className="w-7/8 xl:w-2/3 xl:justify-self-end xl:me-8 hover:cursor-grab active:cursor-grabbing">
