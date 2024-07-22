@@ -39,7 +39,7 @@ export function AboutUsSec({ setInView }) {
 
     return (
         <InViewSec className="wrapper-md" setInView={setInView}>
-			<NeuCard className="max-w-sm md:max-w-4xl" imgSrc={Nene} imgAlt="" title={title} content={content} footer={VIEW_MORE} link="/about" />
+			<NeuCard className="md:justify-self-start max-w-sm md:max-w-4xl" imgSrc={Nene} imgAlt="" title={title} content={content} footer={VIEW_MORE} link="/about" />
         </InViewSec>
     );
 }
@@ -89,7 +89,7 @@ export function QnaSec({ setInView }) {
 
     return (
         <InViewSec className="wrapper-md" setInView={setInView}>
-			<NeuCard className="max-w-sm md:max-w-4xl" imgSrc={Nene} imgAlt="" title={title} content={content} footer={VIEW_MORE} link="/qna" />
+			<NeuCard className="md:justify-self-start max-w-sm md:max-w-4xl" imgSrc={Nene} imgAlt="" title={title} content={content} footer={VIEW_MORE} link="/qna" />
         </InViewSec>
     );
 }

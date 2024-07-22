@@ -25,7 +25,7 @@ import { Maximize } from "lucide-react";
 
 
 export default function YearPage({ params }) {
-	// TODO: Skeleton loading
+	// TODO: Skeleton loading; year range protection
     const { data, isLoading, error } = useSWR(params.year ? `/api/about/${params.year}` : null, fetcher);
 
 	return (
