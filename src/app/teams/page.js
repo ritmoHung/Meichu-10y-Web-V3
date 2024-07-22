@@ -1,3 +1,7 @@
+import TeamList from "@/components/main/team/team-list";
+
+
+
 export default function Teams() {
 	return (
         <div className="grid grid-rows-[auto_1fr]">
@@ -5,7 +9,7 @@ export default function Teams() {
                 <h1 className="bracket bracket-md justify-center">歷屆作品</h1>
 			</header>
 			<main>
-				<span>To be done...</span>
+				<TeamList />
             </main>
         </div>
     );
