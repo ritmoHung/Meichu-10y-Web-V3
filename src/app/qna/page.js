@@ -1,15 +1,7 @@
 // Components & UI
-import QnaAccordion from "@/components/main/qna/qnaAccordion";
+import QnaAccordion from "@/components/main/qna/qna-accordion";
 
 
-
-const checkboxes = [
-    {
-        id: 0,
-        category: "屬性",
-        names: ["2022", "創客組", "競賽內容", "報名相關", "其他"],
-    }
-];
 
 export default function Qna() {
 	return (

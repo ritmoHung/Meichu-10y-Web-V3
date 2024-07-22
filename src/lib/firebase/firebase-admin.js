@@ -17,9 +17,11 @@ if (!admin.apps.length) {
 		universe_domain: "googleapis.com"
 	};
 	admin.initializeApp({
-		credential: admin.credential.cert(serviceAccount)
+		credential: admin.credential.cert(serviceAccount),
+		storageBucket: "meichu-10y-web.appspot.com",
 	});
 }
 
+const bucket = admin.storage().bucket();
 const firestore = admin.firestore();
-export { firestore };
+export { bucket, firestore };
