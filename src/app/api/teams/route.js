@@ -19,7 +19,7 @@ export async function GET() {
 		const teamCollection = firestore.collection("teams");
 		const snapshot = await teamCollection
 			.orderBy("index", "desc")
-			.select("index", "year", "group", "team_name", "title", "introduction")
+			.select("index", "cover_img_url", "group", "introduction", "team_name", "title", "year")
 			.get();
 
 		// Return data with status

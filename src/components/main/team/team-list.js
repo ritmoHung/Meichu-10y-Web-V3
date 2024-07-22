@@ -25,7 +25,7 @@ export default function TeamList() {
 							className="h-full active:neu-pressed-md"
 							size="sm"
 							axis="y"
-							imgSrc={Nene}
+							imgSrc={team.cover_img_url || Nene}
 							imgAlt=""
 							title={team.title}
 							description={team.team_name}
