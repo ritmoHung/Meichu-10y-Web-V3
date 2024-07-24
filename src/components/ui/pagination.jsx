@@ -1,8 +1,8 @@
 import * as React from "react"
-import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, MoreHorizontal } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 const Pagination = ({
 	className,
@@ -11,7 +11,7 @@ const Pagination = ({
 	<nav
 		role="navigation"
 		aria-label="pagination"
-		className={cn("mx-auto flex w-full justify-center", className)}
+		className={cn("mx-auto p-2 flex w-max justify-center", className)}
 		{...props} />
 )
 Pagination.displayName = "Pagination"
@@ -38,9 +38,9 @@ const PaginationLink = ({
 	<a
 		aria-current={isActive ? "page" : undefined}
 		className={cn(buttonVariants({
-			variant: isActive ? "outline" : "ghost",
+			variant: "ghost",
 			size,
-		}), className)}
+		}), isActive ? "neu-pressed-sm" : "", className)}
 		{...props} />
 )
 PaginationLink.displayName = "PaginationLink"
@@ -49,14 +49,15 @@ const PaginationPrevious = ({
 	className,
 	...props
 }) => (
-	<PaginationLink
+	<Button
 		aria-label="Go to previous page"
-		size="default"
-		className={cn("gap-1 pl-2.5", className)}
+		variant="ghost"
+		size="icon"
+		className={cn("gap-1", className)}
 		{...props}>
-		<ChevronLeft className="h-4 w-4" />
-		<span>Previous</span>
-	</PaginationLink>
+		<ChevronLeft className="size-4" />
+		{/* <span>Previous</span> */}
+	</Button>
 )
 PaginationPrevious.displayName = "PaginationPrevious"
 
@@ -64,16 +65,47 @@ const PaginationNext = ({
 	className,
 	...props
 }) => (
-	<PaginationLink
+	<Button
 		aria-label="Go to next page"
-		size="default"
-		className={cn("gap-1 pr-2.5", className)}
+		variant="ghost"
+		size="icon"
+		className={cn("gap-1", className)}
 		{...props}>
-		<span>Next</span>
-		<ChevronRight className="h-4 w-4" />
-	</PaginationLink>
+		{/* <span>Next</span> */}
+		<ChevronRight className="size-4" />
+	</Button>
 )
 PaginationNext.displayName = "PaginationNext"
+
+const PaginationFirst = ({
+	className,
+	...props
+}) => (
+	<Button
+		aria-label="Go to first page"
+		variant="ghost"
+		size="icon"
+		className={cn("gap-1", className)}
+		{...props}>
+		<ChevronsLeft className="size-4" />
+	</Button>
+)
+PaginationFirst.displayName = "PaginationFirst"
+
+const PaginationLast = ({
+	className,
+	...props
+}) => (
+	<Button
+		aria-label="Go to last page"
+		variant="ghost"
+		size="icon"
+		className={cn("gap-1", className)}
+		{...props}>
+		<ChevronsRight className="size-4" />
+	</Button>
+)
+PaginationLast.displayName = "PaginationLast"
 
 const PaginationEllipsis = ({
 	className,
@@ -97,4 +129,6 @@ export {
 	PaginationLink,
 	PaginationNext,
 	PaginationPrevious,
+	PaginationFirst,
+	PaginationLast,
 }
