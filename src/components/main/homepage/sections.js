@@ -6,7 +6,7 @@ import Nene from "/public/imgs/luna.webp";
 
 // SWR
 import useSWR from "swr";
-import { fetcher } from "@/lib/fetcher";
+import fetcher from "@/lib/fetcher";
 
 // Components & UI
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";

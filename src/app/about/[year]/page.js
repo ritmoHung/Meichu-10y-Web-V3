@@ -5,11 +5,11 @@ import Hacker from "/public/imgs/about/hacker.svg";
 import Maker from "/public/imgs/about/maker.svg";
 import Idea from "/public/imgs/about/idea.svg";
 // TODO: Real company logos or not?
-import CompanyTemp from "/public/imgs/deco/company_temp.svg"
+import CompanyTemp from "/public/imgs/deco/company_temp.svg";
 
 // SWR
 import useSWR from "swr";
-import { fetcher } from "@/lib/fetcher";
+import fetcher from "@/lib/fetcher";
 
 // Components & UI
 import Autoplay from "embla-carousel-autoplay";

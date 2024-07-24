@@ -2,7 +2,7 @@
 
 // SWR
 import useSWR from "swr";
-import { fetcher } from "@/lib/fetcher";
+import fetcher from "@/lib/fetcher";
 
 // Components & UI
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
