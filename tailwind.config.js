@@ -22,7 +22,7 @@ module.exports = {
 			...colors,
 			zinc: {
 				50:  "#F5F6F6",
-				100: "#EBECF2",  //"#E4E7E9",
+				100: "#EBECF2",  // "#E4E7E9",
 				200: "#CCD0D5",
 				300: "#A8AEB8",
 				400: "#7D8693",

@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 
-export const fetcher = async (url, { baseUrl = "", params = {}, method = "GET", contentType = "application/json", data = null } = {}) => {
+const fetcher = async (url, { baseUrl = "", params = {}, method = "GET", contentType = "application/json", data = null } = {}) => {
 	const queryString = Object.keys(params).length ? `?${new URLSearchParams(params).toString()}` : "";
 	const finalUrl = baseUrl + url + queryString;
 
@@ -59,3 +59,5 @@ export const fetcher = async (url, { baseUrl = "", params = {}, method = "GET", 
 		}
 	}
 }
+
+export default fetcher;
