@@ -23,7 +23,7 @@ const links = [
 		icon: <Library className="size-[1.2rem]" />,
 	},
 	{
-		name: "歷年作品",
+		name: "歷屆作品",
 		href: "/teams",
 		icon: <Users className="size-[1.2rem]" />,
 	},
@@ -41,6 +41,7 @@ export default function Navbar() {
 	const [isPinned, setIsPinned] = useState(false);
 
 	useEffect(() => {
+		let currentRef = null;
 		const observer = new IntersectionObserver(
 			([entry]) => {
 				setIsPinned(entry.intersectionRatio < 1);
@@ -49,12 +50,13 @@ export default function Navbar() {
 		);
 
 		if (ref.current) {
-			observer.observe(ref.current);
+			currentRef = ref.current;
+			observer.observe(currentRef);
 		}
 
 		return (() => {
-			if (ref.current) {
-				observer.unobserve(ref.current);
+			if (currentRef) {
+				observer.unobserve(currentRef);
 			}
 		})
 	}, []);

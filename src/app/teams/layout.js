@@ -6,7 +6,7 @@ const url = `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/teams`;
 export const metadata = {
     title: {
         default: title,
-        template: "歷屆作品 | %s",
+        template: "%s | 歷屆作品",
     },
     description,
     openGraph: {

@@ -4,23 +4,23 @@ import { Button } from "@/components/ui/button";
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
-import { Mail } from "lucide-react";
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 
 const links = [
 	{
 		name: "Facebook",
 		href: "https://www.facebook.com/HackMeiChu",
-		icon: <FontAwesomeIcon icon={faFacebook} />,
+		icon: <FontAwesomeIcon icon={faFacebook} className="text-[1em]" />,
 	},
 	{
 		name: "Instagram",
 		href: "https://www.instagram.com/mc_hackathon",
-		icon: <FontAwesomeIcon icon={faInstagram} />,
+		icon: <FontAwesomeIcon icon={faInstagram} className="text-[1.1em]" />,
 	},
 	{
 		name: "Mail",
 		href: "mailto:mchackathon2024@gmail.com",
-		icon: <Mail size={"1.2rem"} />,
+		icon: <FontAwesomeIcon icon={faEnvelope} className="text-[1.1em]" />,
 	}
 ];
 
