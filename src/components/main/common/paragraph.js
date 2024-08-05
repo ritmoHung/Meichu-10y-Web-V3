@@ -4,9 +4,8 @@ import remarkGfm from "remark-gfm";
 
 
 
-// TODO: Typography
-export function MarkdownParagraph({ className, content }) {
-	return (
+export function MarkdownParagraph({ className, content, tag = "" }) {
+	const MarkdownContent = (
 		<Markdown
 			remarkPlugins={[[remarkGfm, {singleTilde: false}]]}
 			components={{ p: ({ node, ...props }) =>
@@ -17,5 +16,12 @@ export function MarkdownParagraph({ className, content }) {
 		>
 			{content}
 		</Markdown>
-	)
+	);
+
+	if (tag) {
+		const WrapperElement = tag;
+		return <WrapperElement>{MarkdownContent}</WrapperElement>;
+	}
+
+	return MarkdownContent;
 }
