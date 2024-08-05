@@ -60,7 +60,7 @@ export default function Navbar() {
 	}, []);
 	
 	return (
-        <NavigationMenu ref={ref} className={`${isPinned ? "neu-concave-sm" : ""} sticky -top-px justify-between md:mt-[clamp(0px,_16vh_-_6rem,_3rem)] px-6 py-4`}>
+        <NavigationMenu ref={ref} className={`${isPinned ? "neu-concave-sm" : ""} sticky -top-px justify-between gap-4 md:mt-[clamp(0px,_16vh_-_6rem,_3rem)] px-6 py-4`}>
 			<NavigationMenuList className="p-2 md:ml-20 lg:ml-32 xl:ml-40">
 				<TooltipProvider delayDuration={500}>
 					<NavigationLinks links={links} />
