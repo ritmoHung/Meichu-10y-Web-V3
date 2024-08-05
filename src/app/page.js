@@ -79,7 +79,7 @@ function BannerImg({ aboutUsInView, teamInView, qnaInView }) {
             <Image
                 src={HomepageBG}
                 alt="Concept art of this website"
-                className="max-w-none max-h-none scale-300"
+                className="max-w-none max-h-none scale-300 select-none"
                 priority
             />
         </div>
