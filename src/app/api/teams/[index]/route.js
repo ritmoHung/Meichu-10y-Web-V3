@@ -11,12 +11,15 @@ export async function GET(req, { params }) {
 
 	try {
 		// Get params
-		console.log(params);
 		const teamIndex = params.index;
+		const summaryOnly = req.nextUrl.searchParams.get("summary_only") === "true";
 
-		// Get data from Firestore
+		// Get data from Firestore, filter keys if summary_only
 		const teamCollection = firestore.collection("teams");
 		let query = teamCollection.where("index", "==", teamIndex);
+		if (summaryOnly) {
+			query = query.select("cover_img_url", "introduction", "team_name", "title");
+		}
 		const snapshot = await query.get();
 
 		// Return data with status
@@ -36,5 +39,5 @@ export async function GET(req, { params }) {
 		status = 500;
 	}
 
-    return NextResponse.json({ ...data, message, level }, { status });
+    return NextResponse.json({ data, message, level }, { status });
 }

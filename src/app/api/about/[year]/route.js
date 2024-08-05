@@ -21,7 +21,7 @@ export async function GET(req, { params }) {
 		const aboutCollection = firestore.collection("about");
 		let query = aboutCollection.where("year", "==", Number(year));
 		if (summaryOnly) {
-			query = query.select("year", "summary", "bannerUrl");
+			query = query.select("summary", "bannerUrl");
 		}
 		const snapshot = await query.get();
 

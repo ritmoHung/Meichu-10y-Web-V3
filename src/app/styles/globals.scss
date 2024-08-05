@@ -238,15 +238,16 @@
 	// Footer
 	.footer-link {
 		@apply aspect-square;
+		@apply hover:text-[var(--color)] focus-visible:text-[var(--color)];
 	
 		&[data-name="Facebook"] {
-			@apply hover:text-[#1877F2];
+			--color: #1877F2;
 		}
 		&[data-name="Instagram"] {
-			@apply hover:text-[#D92E7F];
+			--color: #D92E7F;
 		}
 		&[data-name="Mail"] {
-			@apply hover:text-[#EA4335];
+			--color: #EA4335;
 		}
 	}
 }
@@ -281,7 +282,7 @@
 		background: #A8AEB8;
 	}
 	&::-webkit-scrollbar-thumb:hover {
-		@apply bg-gradient-60 from-accent-grad-1 via-accent-grad-2 to-accent-grad-3;
+		@apply bg-gradient-60 from-primary-grad-2 to-primary-grad-1;
 	}
 	&::-webkit-scrollbar-thumb,
 	&::-webkit-scrollbar-thumb:hover {

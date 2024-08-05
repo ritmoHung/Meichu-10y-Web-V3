@@ -1,5 +1,8 @@
 import Image from "next/image";
 
+// Components & UI
+import Anchor from "@/components/main/common/anchor";
+
 // Icon & Images
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFigma, faGithub } from "@fortawesome/free-brands-svg-icons";
@@ -39,22 +42,22 @@ function TeamInformation({ title, teamName, year, group, email, related_urls }) 
 		<div className="wrapper-md gap-2"> 
 			{/* Titles */}
 			<h1 className="text-800">{title}</h1>
-			<span className="text-600">{teamName} ｜ {year} {group}</span>
+			<span className="font-medium text-600">{teamName} ｜ {year} {group}</span>
 
 			{/* URLs */}
-			<div className="grid gap-y-1 [&_>_a]:w-max text-secondary-foreground">
-				<a href={`mailto:${email}`} target="_blank" rel="noreferrer noopener">
+			<div className="grid">
+				<Anchor href={`mailto:${email}`}>
 					<FontAwesomeIcon icon={faEnvelope} />
-					<span className="ml-2 text-tag">{email}</span>
-				</a>
+					<span className="ml-2">{email}</span>
+				</Anchor>
 				{related_urls.map((url, index) => {
 					const resolvedUrl = resolveUrl(url);
 					return (		
-						<a key={index} href={url} target="_blank" rel="noopener noreferrer">
+						<Anchor key={index} href={url}>
 							<FontAwesomeIcon icon={resolvedUrl.icon} />
-							<span className="ml-2 text-tag">{resolvedUrl.urlText}</span>
-						</a>
-					)
+							<span className="ml-2">{resolvedUrl.urlText}</span>
+						</Anchor>
+					);
 				})}
 			</div>
 		</div>
