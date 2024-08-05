@@ -1,6 +1,6 @@
 // # api/about/[year]
 import { NextResponse } from "next/server";
-import { firestore } from "@/lib/firebase/firebase-admin";
+import { firestore } from "@/lib/firebase";
 
 
 
@@ -28,7 +28,7 @@ export async function GET(req, { params }) {
 		// Return data with status
 		if (snapshot.empty) {
 			message = `Info of year ${year} not found.`;
-            level = "info";
+            level = "warning";
             status = 200;
         } else {
 			data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))[0];

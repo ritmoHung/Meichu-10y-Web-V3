@@ -1,6 +1,6 @@
 // # api/qna
 import { NextResponse } from "next/server";
-import { firestore } from "@/lib/firebase/firebase-admin";
+import { firestore } from "@/lib/firebase";
 
 
 
