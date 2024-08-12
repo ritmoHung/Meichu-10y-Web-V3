@@ -5,13 +5,48 @@ import Anchor from "@/components/main/common/anchor";
 
 // Icon & Images
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFigma, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faFigma, faGithub, faGitlab } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faEye, faMessage } from "@fortawesome/free-regular-svg-icons";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 
 
 
-export default function TeamHeader({ className, coverImgUrl, title, year, group, teamName, email, related_urls = [], tags = [] }) {
+function resolveUrl(url) {
+	const FIGMA_URL = "https://www.figma.com";
+	const GITHUB_URL = "https://github.com";
+	const GITLAB_URL = "https://gitlab.com";
+	let icon, urlText;
+
+	if (url.startsWith(FIGMA_URL)) {
+		icon = faFigma;
+		urlText = new URL(url).pathname.split("/").pop();
+	} else if (url.startsWith(GITHUB_URL)) {
+		icon = faGithub;
+		urlText = url.replace(`${GITHUB_URL}/`, "");
+	} else if (url.startsWith(GITLAB_URL)) {
+		icon = faGitlab;
+		urlText = url.replace(`${GITLAB_URL}/`, "");
+
+	}
+	else {
+		icon = faLink;
+		urlText = url.replace("https://", "");
+	}
+
+	return { icon, urlText };
+}
+
+export default function TeamHeader({
+	className = "",
+	coverImgUrl,
+	title,
+	year,
+	group,
+	teamName,
+	email,
+	related_urls = [],
+	tags = []
+}) {
 	return (
 		<header className={`w-screen ${className}`}>
 			<div className="relative py-6 isolate">
@@ -97,23 +132,4 @@ function TeamAside({ className, tags }) {
 			</div>
 		</aside>
 	);
-}
-
-function resolveUrl(url) {
-	const FIGMA_URL = "https://www.figma.com";
-	const GITHUB_URL = "https://github.com";
-	let icon, urlText;
-
-	if (url.startsWith(FIGMA_URL)) {
-		icon = faFigma;
-		urlText = new URL(url).pathname.split("/").pop();
-	} else if (url.startsWith(GITHUB_URL)) {
-		icon = faGithub;
-		urlText = url.replace(`${GITHUB_URL}/`, "");
-	} else {
-		icon = faLink;
-		urlText = url.replace("https://", "");
-	}
-
-	return { icon, urlText };
 }
