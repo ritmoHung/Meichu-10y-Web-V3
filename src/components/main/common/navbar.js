@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import { throttle } from "lodash-es";
 import Link from "next/link";
 
 // Components & UI
@@ -39,30 +40,21 @@ const links = [
 export default function Navbar() {
 	const ref = useRef(null);
 	const [isPinned, setIsPinned] = useState(false);
+	
+	const handleScroll = throttle(() => {
+		if (ref.current) {
+			const rect = ref.current.getBoundingClientRect();
+			setIsPinned(rect.top < 0);
+		}
+	}, 100);
 
 	useEffect(() => {
-		let currentRef = null;
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				setIsPinned(entry.intersectionRatio < 1);
-			},
-			{ threshold: [1] }
-		);
-
-		if (ref.current) {
-			currentRef = ref.current;
-			observer.observe(currentRef);
-		}
-
-		return (() => {
-			if (currentRef) {
-				observer.unobserve(currentRef);
-			}
-		})
-	}, []);
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, [handleScroll]);
 	
 	return (
-        <NavigationMenu ref={ref} className={`${isPinned ? "neu-concave-sm" : ""} sticky -top-px justify-between gap-4 md:mt-[clamp(0px,_16vh_-_6rem,_3rem)] px-6 py-4`}>
+        <NavigationMenu ref={ref} className={`${isPinned ? "neu-concave-sm" : ""} sticky -top-px justify-between gap-4 md:mt-[clamp(0px,_16vh_-_6rem,_3rem)] px-6 py-4 transition-box-shadow`}>
 			<NavigationMenuList className="p-2 md:ml-20 lg:ml-32 xl:ml-40">
 				<TooltipProvider delayDuration={500}>
 					<NavigationLinks links={links} />
