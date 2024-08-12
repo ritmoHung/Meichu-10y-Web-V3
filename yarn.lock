@@ -4959,6 +4959,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash-es@npm:^4.17.21":
+  version: 4.17.21
+  resolution: "lodash-es@npm:4.17.21"
+  checksum: 10c0/fb407355f7e6cd523a9383e76e6b455321f0f153a6c9625e21a8827d10c54c2a2341bd2ae8d034358b60e07325e1330c14c224ff582d04612a46a4f0479ff2f2
+  languageName: node
+  linkType: hard
+
 "lodash.camelcase@npm:^4.3.0":
   version: 4.3.0
   resolution: "lodash.camelcase@npm:4.3.0"
@@ -5354,6 +5361,7 @@ __metadata:
     firebase: "npm:^10.12.4"
     firebase-admin: "npm:^12.2.0"
     framer-motion: "npm:^11.3.8"
+    lodash-es: "npm:^4.17.21"
     lucide-react: "npm:^0.411.0"
     next: "npm:14.2.5"
     next-themes: "npm:^0.3.0"
