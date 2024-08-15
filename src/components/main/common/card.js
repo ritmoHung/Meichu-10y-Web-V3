@@ -37,6 +37,7 @@ export function NeuCard({
 	axis = "x",
 	imgSrc,
 	imgAlt,
+	priority,
 	title,
 	description,
 	badge,
@@ -61,6 +62,7 @@ export function NeuCard({
 					className={`h-full aspect-3/2 ${contain ? "object-contain" : "object-cover"} ${axis === "x" ? "md:max-w-sm md:aspect-square" : ""}`}
 					width={600} height={400}
                     quality={80}
+					priority={priority}
 				/>
 				{showBadge && badge && <Badge className="absolute bottom-0 left-0 flex items-center m-4" variant="secondary">{badge}</Badge>}
 				{/* <span className="absolute neu-concave-sm left-1/2 bottom-0 px-2 py-1 rounded-full -translate-x-1/2 translate-y-1/2">AAA Test</span> */}

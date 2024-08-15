@@ -33,7 +33,7 @@ export default function TeamList() {
 							<Skeleton key={index} className="w-full h-[36rem] rounded-[2rem]" />
 						))
 					) : (
-						currentData && currentData.map(team => (
+						currentData && currentData.map((team, index) => (
 							<li key={team.id}>
 								<Link href={`/teams/${team.id}`}>
 									<NeuCard
@@ -42,6 +42,7 @@ export default function TeamList() {
 										axis="y"
 										imgSrc={team.cover_img_url || Nene}
 										imgAlt=""
+										priority={index < 3}
 										title={team.title}
 										description={team.team_name}
 										badge={`${team.year} ${team.group}`}
