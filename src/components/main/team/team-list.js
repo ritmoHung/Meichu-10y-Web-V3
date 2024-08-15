@@ -35,7 +35,7 @@ export default function TeamList() {
 					) : (
 						currentData && currentData.map(team => (
 							<li key={team.id}>
-								<Link href={`/teams/${team.index}`}>
+								<Link href={`/teams/${team.id}`}>
 									<NeuCard
 										className="h-full active:neu-pressed-md"
 										size="sm"

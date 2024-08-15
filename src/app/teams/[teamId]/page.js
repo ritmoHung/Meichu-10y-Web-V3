@@ -12,11 +12,15 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 
 export default function TeamPage({ params }) {
-	const { data, error, isLoading } = useSWR(params.index ? `/api/teams/${params.index}` : null, fetcher);
+	const { data, error, isLoading } = useSWR(params.teamId ? `/api/teams/${params.teamId}` : null, fetcher);
 	const teamData = data?.data || {};
 
 	// TODO: Error layout
-	if (error) return <div>Error</div>;
+	if (error) return (
+		<div className="grid justify-items-center content-center gap-8 p-8">
+			<span>{error.message}</span>
+		</div>
+	);
 
 	return (
         <div>
@@ -37,9 +41,7 @@ export default function TeamPage({ params }) {
 				)}
 			</header>
 			<main>
-				{isLoading ? (
-					<div></div>
-				) : (
+				{!isLoading && (
 					<div className="wrapper-md">
 						<article className="grid gap-y-18 py-12">
 							<IntroSection introduction={teamData.introduction} />

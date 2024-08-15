@@ -1,17 +1,18 @@
 import axios from "axios";
 
+const DEFAULT_ERROR_MESSAGE = "噢不。出事了阿伺";
+const NO_RESPONSE_MESSAGE = "噢不。阿伺你怎麼沒感覺";
+
 
 
 const fetcher = async (url, { baseUrl = "", params = {}, method = "GET", contentType = "application/json", data = null } = {}) => {
-	const queryString = Object.keys(params).length ? `?${new URLSearchParams(params).toString()}` : "";
-	const finalUrl = baseUrl + url + queryString;
-
 	const options = {
 		method,
-		url: finalUrl,
+		url: baseUrl + url,
 		headers: {
 			"Content-Type": contentType,
 		},
+		params,
 		data,
 	};
 
@@ -35,28 +36,24 @@ const fetcher = async (url, { baseUrl = "", params = {}, method = "GET", content
 
 		return { ...response.data, status: response.status }
 	} catch (error) {
+		let serverError, status;
+
 		if (error.response) {
 			// Handle errors from the server
-			throw { 
-				message: error.response.data.message || "An error occurred.",
-				level: error.response.data.level || "error",
-				status: error.response.status,
-			};
+			status = error.response.status;
+			serverError = new Error(`[${status}] ${DEFAULT_ERROR_MESSAGE}`);
 		} else if (error.request) {
 			// Handle errors due to no response received
-			throw {
-				message: "No response from server.",
-				level: "error",
-				status: null,
-			};
+			status = 500;
+			serverError = new Error(`[${status}] ${NO_RESPONSE_MESSAGE}`);
 		} else {
 			// Handle other errors
-			throw {
-				message: error.message,
-				level: "error",
-				status: null,
-			};
+			status = 0;
+			serverError = new Error(`[${status}] ${DEFAULT_ERROR_MESSAGE}`);
 		}
+
+		serverError.status = status;
+		throw serverError;
 	}
 }
 
