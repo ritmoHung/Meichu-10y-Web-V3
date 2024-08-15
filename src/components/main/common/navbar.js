@@ -46,7 +46,7 @@ export default function Navbar() {
 			const rect = ref.current.getBoundingClientRect();
 			setIsPinned(rect.top < 0);
 		}
-	}, 100);
+	}, 10);
 
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll);

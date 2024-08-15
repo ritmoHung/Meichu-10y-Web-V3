@@ -37,7 +37,6 @@ function resolveUrl(url) {
 }
 
 export default function TeamHeader({
-	className = "",
 	coverImgUrl,
 	title,
 	year,
@@ -48,36 +47,39 @@ export default function TeamHeader({
 	tags = []
 }) {
 	return (
-		<header className={`w-screen ${className}`}>
+		<>
 			<div className="relative py-6 isolate">
 				{/* Information */}
 				<TeamInformation title={title} teamName={teamName} year={year} group={group} email={email} related_urls={related_urls} />
-
+				
 				{/* Gradient Overlay */}
 				<GradientOverlay className="absolute top-0 left-0 w-full h-full -z-1" />
 
 				{/* Cover Image */}
-                <Image
-                    src={coverImgUrl}
-                    alt={`Cover image of ${title}`}
-                    className={`absolute top-0 right-0 h-full object-cover opacity-40 -z-2`}
-					width={1920} height={640} 
-                    quality={100}
-                    priority
-                />
+				{coverImgUrl && (
+					<Image
+						src={coverImgUrl}
+						alt={`Cover image of ${title}`}
+						className={`absolute top-0 right-0 h-full object-cover opacity-40 -z-2`}
+						width={1920} height={640} 
+						quality={100}
+						priority
+					/>
+				)}
 			</div>
-
 			<TeamAside tags={tags} />
-		</header>
+		</>
 	);
 }
 
 function TeamInformation({ title, teamName, year, group, email, related_urls }) {
 	return (
-		<div className="wrapper-md gap-2"> 
+		<div className="wrapper-md gap-4"> 
 			{/* Titles */}
-			<h1 className="text-800">{title}</h1>
-			<span className="font-medium text-600">{teamName} ｜ {year} {group}</span>
+			<div>	
+				<h1 className="text-800">{title}</h1>
+				<span className="font-medium text-600">{teamName} ｜ {year} {group}</span>
+			</div>
 
 			{/* URLs */}
 			<div className="grid">
@@ -113,7 +115,7 @@ function TeamAside({ className, tags }) {
 					{/* Tags */}
 					<div className="flex items-center gap-x-4">
 						{tags.map((tag, index) => (
-							<span key={index}>#{tag}</span>
+							<span key={index} className="w-max">#{tag}</span>
 						))}
 					</div>
 
@@ -123,10 +125,10 @@ function TeamAside({ className, tags }) {
 							<FontAwesomeIcon icon={faEye} className="mr-2"/>
 							{3357}
 						</span>
-						<span>
+						{/* <span>
 							<FontAwesomeIcon icon={faMessage} className="mr-2" />
 							{9}
-						</span>
+						</span> */}
 					</div>
 				</div>
 			</div>
