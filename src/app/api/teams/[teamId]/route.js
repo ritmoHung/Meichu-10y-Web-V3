@@ -11,25 +11,22 @@ export async function GET(req, { params }) {
 
 	try {
 		// Get params
-		const teamIndex = params.index;
+		const teamId = params.teamId;
 		const summaryOnly = req.nextUrl.searchParams.get("summary_only") === "true";
 
 		// Get data from Firestore, filter keys if summary_only
-		const teamCollection = firestore.collection("teams");
-		let query = teamCollection.where("index", "==", teamIndex);
-		if (summaryOnly) {
-			query = query.select("cover_img_url", "introduction", "team_name", "title");
-		}
-		const snapshot = await query.get();
+		const teamDoc = firestore.collection("teams").doc(teamId);
+		const fields = ["cover_img_url", "introduction", "team_name", "title"];
+		const snapshot = summaryOnly ? await teamDoc.get({ fields }) : await teamDoc.get();
 
 		// Return data with status
-		if (snapshot.empty) {
-			message = `Info of team ${teamIndex} not found.`;
+		if (!snapshot.exists) {
+			message = `Info of team ${teamId} not found.`;
             level = "warning";
-            status = 200;
+            status = 404;
         } else {
-			data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))[0];
-            message = `Info of team ${teamIndex} retrieved successfully.`;
+			data = { id: snapshot.id, ...snapshot.data() };
+            message = `Info of team ${teamId} retrieved successfully.`;
             level = "info";
             status = 200;
 		}

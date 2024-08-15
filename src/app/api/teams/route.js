@@ -18,7 +18,7 @@ export async function GET() {
 		// Get data from Firestore, order by "index" in descending order, then filter keys
 		const teamCollection = firestore.collection("teams");
 		const snapshot = await teamCollection
-			.orderBy("index", "desc")
+			.orderBy("timestamp", "desc")
 			.select("index", "cover_img_url", "group", "introduction", "team_name", "title", "year")
 			.get();
 
