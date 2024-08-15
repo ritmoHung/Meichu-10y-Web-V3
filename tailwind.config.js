@@ -18,22 +18,6 @@ module.exports = {
 	],
 	darkMode: "class",
 	theme: {
-		colors: {
-			...colors,
-			zinc: {
-				50:  "#F5F6F6",
-				100: "#EBECF2",  // "#E4E7E9",
-				200: "#CCD0D5",
-				300: "#A8AEB8",
-				400: "#7D8693",
-				500: "#626B78",
-				600: "#545966",
-				700: "#464A53",
-				800: "#40434A",
-				900: "#393B40",
-				950: "#232429",
-			}
-		},
 		container: {
 			center: true,
 			padding: "2rem",
@@ -87,6 +71,19 @@ module.exports = {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",
+				zinc: {
+					50:  "#F5F6F6",
+					100: "#EBECF2",  // "#E4E7E9",
+					200: "#CCD0D5",
+					300: "#A8AEB8",
+					400: "#7D8693",
+					500: "#626B78",
+					600: "#545966",
+					700: "#464A53",
+					800: "#40434A",
+					900: "#393B40",
+					950: "#232429",
+				},
 			},
 			fontFamily: {
 				sans: ["var(--font-space-grotesk)", "var(--font-noto-sans-tc)", ...defaultTheme.fontFamily.sans],
